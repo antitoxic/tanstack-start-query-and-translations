@@ -15,8 +15,13 @@ import { NotFound } from '~/components/NotFound'
 import appCss from '~/styles/app.css?url'
 import { seo } from '~/utils/seo'
 
+
 export const Route = createRootRouteWithContext<{
-  queryClient: QueryClient
+  queryClient: QueryClient,
+  translationsClient: {
+    loadAllLanguagesOnServer: () => Promise<any>
+    registerUsedData: (translationKey: string) => void
+  }
 }>()({
   head: () => ({
     meta: [
@@ -64,6 +69,9 @@ export const Route = createRootRouteWithContext<{
     )
   },
   notFoundComponent: () => <NotFound />,
+  loader: async ({ context }) => {
+    await context.translationsClient.loadAllLanguagesOnServer()
+  },
   component: RootComponent,
 })
 
