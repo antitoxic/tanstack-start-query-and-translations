@@ -9,7 +9,7 @@ const loadNamespace = createIsomorphicFn()
       "Welcome to our!": `Welcome: This is the translation FROM CUSTOM BACKEND (server) (ns: ${namespace})`,
     };
   })
-  .client(async () => {
+  .client(async ({ namespace, language }) => {
     await new Promise((resolve) => setTimeout(resolve, 3000));
     return {
       "Welcome to our!": `Welcome: This is the translation FROM CUSTOM BACKEND (browser) (ns: ${namespace})`,
