@@ -10,6 +10,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import * as React from 'react'
 import type { QueryClient } from '@tanstack/react-query'
+import type { i18n as I18nInstance } from 'i18next'
+import { I18nextProvider } from 'react-i18next'
 import { DefaultCatchBoundary } from '~/components/DefaultCatchBoundary'
 import { NotFound } from '~/components/NotFound'
 import appCss from '~/styles/app.css?url'
@@ -18,10 +20,7 @@ import { seo } from '~/utils/seo'
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient,
-  translationsClient: {
-    loadAllLanguagesOnServer: () => Promise<any>
-    registerUsedData: (translationKey: string) => void
-  }
+  i18next: I18nInstance
 }>()({
   head: () => ({
     meta: [
@@ -69,17 +68,18 @@ export const Route = createRootRouteWithContext<{
     )
   },
   notFoundComponent: () => <NotFound />,
-  loader: async ({ context }) => {
-    await context.translationsClient.loadAllLanguagesOnServer()
-  },
   component: RootComponent,
 })
 
 function RootComponent() {
+  const { i18next } = Route.useRouteContext()
+
   return (
-    <RootDocument>
-      <Outlet />
-    </RootDocument>
+    <I18nextProvider i18n={i18next}>
+      <RootDocument>
+        <Outlet />
+      </RootDocument>
+    </I18nextProvider>
   )
 }
 

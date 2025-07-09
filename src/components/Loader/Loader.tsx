@@ -1,9 +1,10 @@
-import { useTranslationData } from '~/core/translation/useTranslationData';
+import { useMyTranslation } from "~/core/translation/experiment";
 
 export const Loader = () => {
-  useTranslationData('components/Loader', {
-    en: () => import('./i18n/en.json'),
-    bg: () => import('./i18n/bg.json'),
-  });
-  return <div>Loader</div>;
+  const { Trans } = useMyTranslation("anothernamespace");
+  return (
+    <div>
+      Loader: <Trans>Welcome to our!</Trans>
+    </div>
+  );
 };

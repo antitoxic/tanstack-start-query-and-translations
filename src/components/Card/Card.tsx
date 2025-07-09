@@ -1,9 +1,11 @@
-import { useTranslationData } from '~/core/translation/useTranslationData';
+import { useMyTranslation } from "~/core/translation/experiment";
+// import { useTranslationData } from "~/core/translation/useTranslationData";
 
 export const Card = () => {
-  useTranslationData('components/Card', {
-    en: () => import('./i18n/en.json'),
-    bg: () => import('./i18n/bg.json'),
-  });
-  return <div>Card</div>;
+  const { Trans } = useMyTranslation("common");
+  return (
+    <div>
+      Card: <Trans>Welcome to our!</Trans>
+    </div>
+  );
 };
