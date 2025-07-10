@@ -5,7 +5,7 @@ export const Card = () => {
   const { Trans } = useMyTranslation("common");
   return (
     <div>
-      Card: <Trans>Welcome to our!</Trans>
+      Card: <Trans>goodbye</Trans>
     </div>
   );
 };

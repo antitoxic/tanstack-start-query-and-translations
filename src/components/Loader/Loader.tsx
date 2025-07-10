@@ -4,7 +4,7 @@ export const Loader = () => {
   const { Trans } = useMyTranslation("anothernamespace");
   return (
     <div>
-      Loader: <Trans>Welcome to our!</Trans>
+      Loader: <Trans>hi</Trans>
     </div>
   );
 };

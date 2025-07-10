@@ -1,0 +1,5 @@
+[build]
+  publish = "./dist"
+  # when using netlify cli this is only run on the machine that runs the CLI
+  # not netlify cloud
+  command = "pnpm run build"
